@@ -13,7 +13,7 @@ app.listen(PORT, () => {
   console.log(`App running on port ${PORT}.`);
 });
 
-app.get("/user", async (req, res) => {
+app.get("/users", async (_, res) => {
   try {
     const queryText = `SELECT * FROM users`;
     const response = await pool.query(queryText);
@@ -23,7 +23,7 @@ app.get("/user", async (req, res) => {
   }
 });
 
-app.get("/users", async (req, res) => {
+app.get("/user", async (req, res) => {
   const { name, email } = req.body;
   try {
     const queryText = `SELECT * FROM users WHERE name='${name}' AND email='${email}'`;
@@ -40,7 +40,7 @@ app.post("/createTable", async (_, res) => {
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) NOT NULL,
+      email VARCHAR(255) NOT NULL
     )`;
     await pool.query(tableQueryText);
     res.send("ok");
@@ -51,7 +51,7 @@ app.post("/createTable", async (_, res) => {
 
 app.post("/user", async (req, response) => {
   const { name, email } = req.body;
-  console.log(name, email, "req.body");
+
   try {
     const queryText =
       "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *";
@@ -63,7 +63,28 @@ app.post("/user", async (req, response) => {
   }
 });
 
-// `
-//     INSERT INTO users (name, email) VALUES ($1, $2)
-//     INSERT INTO tableName (fields) Values ()
-// `
+app.delete("/user", async (req, response) => {
+  const { name, email, id } = req.body;
+
+  try {
+    const queryText = `DELETE FROM users WHERE (name = '${name}' AND email = '${email}') OR id = '${id}'`;
+    await pool.query(queryText);
+    response.send("ok");
+  } catch (error) {
+    response.send("error").end();
+    console.error(error);
+  }
+});
+
+app.put("/user", async (req, response) => {
+  const { name, email, id } = req.body;
+
+  try {
+    const queryText = `UPDATE users SET name = '${name}', email = '${email}' WHERE id = '${id}'`;
+    await pool.query(queryText);
+    response.send("updated");
+  } catch (error) {
+    response.send("error").end();
+    console.error(error);
+  }
+});
