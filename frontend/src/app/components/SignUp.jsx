@@ -21,12 +21,12 @@ export default function signup() {
               className="input input-bordered w-full"
             />
             <input
-              type="password"
+              type="text"
               placeholder="Email"
               className="input input-bordered w-full"
             />
             <input
-              type="text"
+              type="password"
               placeholder="Password"
               className="input input-bordered w-full"
             />
