@@ -1,5 +1,9 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import Vector from "@/app/SVG/Vector";
 export default function LogIn() {
+  const router = useRouter();
   return (
     <div className="flex">
       <div className="flex-1 h-screen flex items-center justify-center bg-white gap-4">
@@ -29,7 +33,13 @@ export default function LogIn() {
           </div>
           <div className="flex items-center justify-center gap-3">
             <p className="text-gray-600">Don’t have an account?</p>
-            <button className="text-blue-600">Sign up</button>
+            <button
+              className="text-blue-600"
+              type="button"
+              onClick={() => router.push("/SignUp")}
+            >
+              Sign up
+            </button>
           </div>
         </div>
       </div>

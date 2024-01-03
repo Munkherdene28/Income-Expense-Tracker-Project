@@ -1,6 +1,9 @@
+"use client";
 import Vector from "@/app/SVG/Vector";
 import Done from "@/app/SVG/Done";
+import { useRouter } from "next/navigation";
 export default function finish() {
+  const router = useRouter();
   return (
     <div className="flex flex-col justify-center items-center gap-40 pt-10">
       <div className="flex flex-col gap-10">
@@ -21,7 +24,13 @@ export default function finish() {
           Your very first account has been created. Now<br></br> continue to
           dashboard and start tracking.
         </p>
-        <button className="btn btn-primary w-full">Go to Dashboard</button>
+        <button
+          className="btn btn-primary w-full"
+          type="button"
+          onClick={() => router.push("/dashboard")}
+        >
+          Go to Dashboard
+        </button>
       </div>
     </div>
   );
