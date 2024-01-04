@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <main className=" w-screen-full h-screen-full">
       <LogIn />
-      <Wait />
+      {/* <Wait />
       <Currency />
       <Balance />
-      <Finish />
+      <Finish /> */}
     </main>
   );
 }
