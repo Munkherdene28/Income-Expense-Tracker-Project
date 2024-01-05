@@ -2,7 +2,25 @@ import Vector from "@/app/SVG/Vector";
 import Plus from "@/app/SVG/Plus";
 import Up from "../SVG/Up";
 import Down from "../SVG/Down";
+import Chart from "chart.js/auto";
 export default function dashboard() {
+  const incomeData = [
+    {
+      title: "Your Income",
+      amount: "1,200,000₮",
+      description: "Your Income Amount",
+      percentageChange: "32% from last month",
+      Up: <Up />,
+    },
+    {
+      title: "Total Expenses",
+      amount: "-1,200,000₮",
+      description: "Your Income Amount",
+      Up: <Down />,
+      percentageChange: "32% from last month",
+    },
+  ];
+
   return (
     <div className="">
       <div className="flex justify-between items-center px-80 py-3">
@@ -27,41 +45,32 @@ export default function dashboard() {
           <div className="flex gap-4 w-[500px]">
             <div className="skeleton h-[250px] w-full"></div>
           </div>
-          <div className="bg-white w-[500px] h-[200px] skeleton">
-            <div className="flex items-center py-4 px-4 gap-2">
-              <div className="bg-green-400 w-[10px] h-[10px] rounded-3xl"></div>
-              <h1 className="text-lg font-semibold">Your Income</h1>
-            </div>
-            <hr />
-            <div className="flex flex-col gap-6 px-6 pb-6 pt-5">
-              <div className="flex flex-col gap-2">
-                <h1 className="text-3xl font-bold">1,200,000₮</h1>
-                <p className="text-gray-500 text-lg">Your Income Amount</p>
+          <div className="flex gap-12">
+            {incomeData.map((data, index) => (
+              <div
+                key={index}
+                className="bg-white w-[500px] h-[250px] skeleton"
+              >
+                <div className="flex items-center py-4 px-4 gap-2">
+                  <div className="bg-green-400 w-[10px] h-[10px] rounded-3xl"></div>
+                  <h1 className="text-lg font-semibold">{data.title}</h1>
+                </div>
+                <hr />
+                <div className="flex flex-col gap-8 px-6 py-6">
+                  <div className="flex flex-col gap-2">
+                    <h1 className="text-4xl font-bold">{data.amount}</h1>
+                    <p className="text-gray-500 text-xl">{data.description}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    {data.Up}
+                    <h1 className="text-lg">{data.percentageChange}</h1>
+                  </div>
+                </div>
               </div>
-              <div className="flex gap-2">
-                <Up />
-                <h1>32% from last month</h1>
-              </div>
-            </div>
+            ))}
           </div>
-          {/* <div className="bg-white w-[500px] h-[250px] skeleton">
-            <div className="flex items-center py-4 px-4 gap-2">
-              <div className="bg-blue-500 w-[10px] h-[10px] rounded-3xl"></div>
-              <h1>Total Expenses</h1>
-            </div>
-            <hr />
-            <div>
-              <div>
-                <h1>-1,200,000₮</h1>
-                <p>Your Income Amount</p>
-              </div>
-              <div className="flex ">
-                <Down />
-                <h1>32% from last month</h1>
-              </div>
-            </div>
-          </div> */}
         </div>
+        <div></div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { pool } from "../db.js";
 
-export const getUsers = async (req, res) => {
+export const getUsers = async (_, res) => {
   try {
     const queryText = "SELECT * FROM users";
     const response = await pool.query(queryText);
@@ -13,7 +13,7 @@ export const getUsers = async (req, res) => {
 export const getOneUser = async (req, res) => {
   const { id, name, email } = req.body;
   try {
-    const queryText = `SELECT * FROM users WHERE id='${id}' OR (name='${name}' AND id != '${id}') OR (email='${email}' AND id != '${id}')`;
+    const queryText = `SELECT * FROM users WHERE name='${name}' AND email='${email}'`;
     const response = await pool.query(queryText);
     res.send(response.rows);
   } catch (error) {
@@ -22,11 +22,11 @@ export const getOneUser = async (req, res) => {
 };
 
 export const createUser = async (req, response) => {
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
   try {
     const queryText =
-      "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING *";
-    const res = await pool.query(queryText, [name, email]);
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *";
+    const res = await pool.query(queryText, [name, email, password]);
     response.send(res.rows[0]);
   } catch (error) {
     console.error(error);
@@ -35,11 +35,10 @@ export const createUser = async (req, response) => {
 
 export const deleteUser = async (req, response) => {
   const { name, email, id } = req.body;
-
   try {
-    const queryText = `DELETE FROM users WHERE (name = '${name}' AND email = '${email}') OR id = '${id}'`;
+    const queryText = `DELETE FROM users WHERE (name='${name}' AND email='${email}') OR id='${id}'`;
     await pool.query(queryText);
-    response.send("ok");
+    response.send("deleted");
   } catch (error) {
     console.error(error);
   }

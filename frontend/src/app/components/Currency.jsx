@@ -21,7 +21,6 @@ export default function currency() {
           <select className="select bg-gray-100 w-full">
             <option>MNT-Mongolian Tugrik</option>
             <option>USD</option>
-            <option>EUR</option>
           </select>
         </label>
         <p className="text-[12px]">
