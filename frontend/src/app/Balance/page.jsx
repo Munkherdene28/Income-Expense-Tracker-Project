@@ -1,6 +1,9 @@
+"use client";
 import Vector from "@/app/SVG/Vector";
 import Coin from "@/app/SVG/Coin";
+import { useRouter } from "next/navigation";
 export default function balance() {
+  const router = useRouter();
   return (
     <div className="flex flex-col justify-center items-center gap-40 pt-10">
       <div className="flex flex-col gap-10">
@@ -22,8 +25,15 @@ export default function balance() {
           placeholder="Email"
           className="input input-bordered w-full bg-gray-100"
         />
-        <p className="text-[12px] w-full">How much cash do you have in your wallet?</p>
-        <button className="btn btn-primary w-full">Confirm</button>
+        <p className="text-[12px] w-full">
+          How much cash do you have in your wallet?
+        </p>
+        <button
+          className="btn btn-primary w-full"
+          onClick={() => router.push("/Finish")}
+        >
+          Confirm
+        </button>
       </div>
     </div>
   );

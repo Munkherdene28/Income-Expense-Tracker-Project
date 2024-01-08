@@ -1,8 +1,9 @@
 import LogIn from "@/app/LogIn/page";
 import Wait from "@/app/components/Wait";
-import Currency from "@/app/components/Currency";
-import Balance from "@/app/components/Balance";
-import Finish from "@/app/components/Finish";
+import Currency from "@/app/Currency/page";
+import Balance from "@/app/Balance/page";
+import Finish from "@/app/Finish/page";
+import One from "@/app/One.js";
 export default function Home() {
   return (
     <main className=" w-screen-full h-screen-full">
@@ -11,6 +12,7 @@ export default function Home() {
       <Currency />
       <Balance />
       <Finish />
+      <One />
     </main>
   );
 }
