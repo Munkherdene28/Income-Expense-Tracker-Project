@@ -18,7 +18,7 @@ app.listen(PORT, () => {
   console.log(`App running on port ${PORT}`);
 });
 
-app.post("/createTable", async (req, res) => {
+app.post("/createTable", async (_, res) => {
   try {
     const tableQueryText = `
         CREATE TABLE IF NOT EXISTS users (

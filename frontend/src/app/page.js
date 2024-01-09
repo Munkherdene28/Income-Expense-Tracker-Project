@@ -12,7 +12,7 @@ export default function Home() {
       <Currency />
       <Balance />
       <Finish />
-      <One />
+      {/* <One /> */}
     </main>
   );
 }
