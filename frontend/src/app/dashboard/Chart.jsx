@@ -1,7 +1,6 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 export default function chart() {
   ChartJS.register(ArcElement);
@@ -34,7 +33,7 @@ export default function chart() {
 
   return (
     <div className="flex gap-12">
-      <div className="bg-white w-[610px] h-[310px] rounded-xl">
+      <div className="bg-white w-[610px] h-[313px] rounded-xl">
         <div className="flex justify-between items-center p-4">
           <h1 className="text-2xl font-bold">Income - Expense</h1>
           <p className="text-gray-500">Jun 1 - Nov 30</p>
