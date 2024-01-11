@@ -1,10 +1,16 @@
+"use client";
 import Header from "../dashboard/Header";
 import Plus from "../SVG/Plus";
 import Eye from "../SVG/Eye";
 import Icon from "../SVG/Icon";
 import Blue from "../SVG/Blue";
 import Select from "../Records/Select";
+import React, { useState } from "react";
 export default function record() {
+  const [isShow, setIsShow] = useState(false);
+  const handleAddButtonClick = () => {
+    setIsShow(!isShow);
+  };
   const Category = [
     {
       eye: <Eye />,
@@ -66,10 +72,13 @@ export default function record() {
     <div>
       <Header />
       <div className="bg-gray-100 w-full h-screen flex gap-6">
-        <div className="inline-flex items-start gap-6 w-[288px] h-[1032px] bg-white mt-8 ml-[480px] rounded-lg flex-col py-6 px-4">
+        <div className="inline-flex items-start gap-6 w-[288px] h-[1020px] bg-white mt-8 ml-[480px] rounded-lg flex-col py-6 px-4">
           <div className="flex flex-col gap-6">
             <h1 className="text-xl font-semibold">Records</h1>
-            <button className="btn btn-primary btn-wide">
+            <button
+              className="btn btn-primary btn-wide"
+              onClick={handleAddButtonClick}
+            >
               <Plus /> Add
             </button>
           </div>

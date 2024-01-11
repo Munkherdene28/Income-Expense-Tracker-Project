@@ -1,8 +1,15 @@
 import Back from "../SVG/Back";
 import Go from "../SVG/Go";
 import Fork from "../SVG/Fork";
+import Home from "../SVG/Home";
 export default function select() {
   const Food = [
+    {
+      svg: <Home />,
+      text: "Food & Drinks",
+      date: "14:00",
+      expense: "-1,000₮",
+    },
     {
       svg: <Fork />,
       text: "Food & Drinks",
@@ -63,6 +70,33 @@ export default function select() {
         </div>
         <div className="flex flex-col gap-4">
           <h1 className="text-md font-bold">Today</h1>
+          <div className="flex items-center flex-col gap-4">
+            {Food.map((data, index) => (
+              <div
+                key={index}
+                className="flex bg-white w-[970px] h-[60px] rounded-xl"
+              >
+                <div className="flex justify-between w-[970px] items-center p-4">
+                  <div className="flex items-center gap-3">
+                    <input type="checkbox" className="checkbox" />
+                    <div className="flex gap-4">
+                      <div>{data.svg}</div>
+                      <div>
+                        <h1>{data.text}</h1>
+                        <p className="text-gray-500 text-sm">{data.date}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-yellow-500">{data.expense}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h1 className="text-md font-bold">Yesterday</h1>
           <div className="flex items-center flex-col gap-4">
             {Food.map((data, index) => (
               <div
