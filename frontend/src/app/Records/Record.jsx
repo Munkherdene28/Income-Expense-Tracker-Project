@@ -12,6 +12,18 @@ export default function record() {
   const handleAddButtonClick = () => {
     setIsShow(!isShow);
   };
+
+  const [incomeButtonColor, setIncomeButtonColor] = useState("");
+  const [expenseButtonColor, setExpenseButtonColor] = useState("");
+  const handleIncomeButtonClick = () => {
+    setIncomeButtonColor("#16A34A");
+    setExpenseButtonColor("");
+  };
+  const handleExpenseButtonClick = () => {
+    setExpenseButtonColor("#0166FF");
+    setIncomeButtonColor("");
+  };
+
   const Category = [
     {
       eye: <Eye />,
@@ -69,6 +81,7 @@ export default function record() {
       icon: <Icon />,
     },
   ];
+
   return (
     <div>
       <Header />
@@ -151,7 +164,7 @@ export default function record() {
       </div>
       {isShow && (
         <div
-          className={`flex justify-center items-center bg-gray-100 opacity-1 h-screen `}
+          className={`flex justify-center items-center fixed top-0 left-0 w-full h-full bg-black bg-opacity-50`}
         >
           <div className="flex w-[792px] h-[510px] flex-col items-start bg-base-100 p-4 rounded-lg bg-white gap-3">
             <div className="flex justify-between w-[750px] items-center">
@@ -170,12 +183,16 @@ export default function record() {
                       type="radio"
                       name="options"
                       aria-label="Expense"
+                      onClick={handleExpenseButtonClick}
+                      style={{ backgroundColor: expenseButtonColor }}
                     />
                     <input
                       className="join-item btn w-[160px]"
                       type="radio"
                       name="options"
                       aria-label="Income"
+                      onClick={handleIncomeButtonClick}
+                      style={{ backgroundColor: incomeButtonColor }}
                     />
                   </div>
                 </div>
@@ -206,7 +223,12 @@ export default function record() {
                     </select>
                   </div>
                 </div>
-                <button className="w-full h-[45px] bg-blue-600 rounded-3xl text-white">
+                <button
+                  className="w-full h-[45px] bg-blue-600 rounded-3xl text-white"
+                  style={{
+                    backgroundColor: incomeButtonColor,
+                  }}
+                >
                   Add Record
                 </button>
               </div>

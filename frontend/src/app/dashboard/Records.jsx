@@ -37,6 +37,7 @@ export default function record() {
       <div className=" flex p-6">
         <h1 className="text-md font-semibold">Last Records</h1>
       </div>
+      <hr />
       <div className="flex flex-col gap-8 items-start px-6">
         {Lending.map((data, index) => (
           <div key={index} className="flex justify-between w-[1220px]">

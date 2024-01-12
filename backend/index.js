@@ -22,7 +22,7 @@ app.post("/createTable", async (_, res) => {
   try {
     const tableQueryText = `
         CREATE TABLE IF NOT EXISTS users (
-            id uuid PRIMARY KEY DEFAULT gen_random_uuid (),
+          id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
             email VARCHAR(50) UNIQUE NOT NULL,
             name VARCHAR(255) NOT NULL,
             password VARCHAR(255) NOT NULL,

@@ -1,4 +1,4 @@
-import Geld from "../Image/Geld.png";
+import One from "../Image/One.png";
 import Up from "../SVG/Up";
 import Down from "../SVG/Down";
 export default function income() {
@@ -21,14 +21,14 @@ export default function income() {
   return (
     <div className="flex gap-12">
       <div className="w-[395px] h-[225px] rounded-lg">
-        <img src={Geld} />
+        <img src={One} />
       </div>
       <div className="flex gap-12">
         {incomeData.map((data, index) => (
           <div key={index} className="bg-white w-[390px] h-[225px] rounded-lg">
             <div className="flex items-center py-3 px-4 gap-2">
               <div className="bg-green-400 w-[10px] h-[10px] rounded-3xl"></div>
-              <h1 className="text-lg font-semibold">{data.title}</h1>
+              <h1 className="text-xl font-semibold">{data.title}</h1>
             </div>
             <hr />
             <div className="flex flex-col gap-4 px-6 pb-8 pt-6">
