@@ -1,7 +1,7 @@
-import Back from "../SVG/Back";
-import Go from "../SVG/Go";
-import Fork from "../SVG/Fork";
-import Home from "../SVG/Home";
+import Back from "../../SVG/Back";
+import Go from "../../SVG/Go";
+import Fork from "../../SVG/Fork";
+import Home from "../../SVG/Home";
 export default function select() {
   const Food = [
     {
@@ -36,7 +36,7 @@ export default function select() {
     },
   ];
   return (
-    <div className="pt-[50px]">
+    <div className="pb-[25px]">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between w-[970px] items-center">

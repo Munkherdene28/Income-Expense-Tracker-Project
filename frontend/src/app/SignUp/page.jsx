@@ -2,20 +2,25 @@
 import Vector from "@/app/SVG/Vector";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import axios from "axios";
+
 const api = "http://localhost:8000/users";
 
 export default function signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setname] = useState("");
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
   const router = useRouter();
-  const keys = { name, email, password };
 
-  const currency = () => {
+  const handler = async () => {
+    const input = {
+      name,
+      email,
+      password,
+      currency: "MNT",
+    };
+
+    localStorage.setItem("data", JSON.stringify(input));
     router.push("/Currency");
-    localStorage.setItem("data", JSON.stringify(keys));
-    console.log(keys);
   };
   return (
     <div className="flex">
@@ -34,33 +39,30 @@ export default function signup() {
           <div className="flex flex-col gap-4">
             <input
               type="name"
-              value={name}
               placeholder="Name"
               className="input input-bordered w-full"
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setname(e.target.value)}
             />
             <input
               type="email"
-              value={email}
               placeholder="Email"
               className="input input-bordered w-full"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setemail(e.target.value)}
             />
             <input
               type="password"
-              value={password}
               placeholder="Password"
               className="input input-bordered w-full"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setpassword(e.target.value)}
             />
             <input
               type="password"
-              value={password}
+              name="confirmpassword"
               placeholder="Re-password"
               className="input input-bordered w-full"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setpassword(e.target.value)}
             />
-            <button className="btn btn-primary w-full" onClick={currency}>
+            <button className="btn btn-primary w-full" onClick={handler}>
               Sign Up
             </button>
           </div>

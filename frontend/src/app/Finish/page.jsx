@@ -2,8 +2,22 @@
 import Vector from "@/app/SVG/Vector";
 import Done from "@/app/SVG/Done";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
+const api = "http://localhost:8000/users";
+
 export default function finish() {
   const router = useRouter();
+  let data = JSON.parse(localStorage.getItem("data"));
+  const handler = async () => {
+    let res = await axios.post(api, {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      currency_type: data.currency,
+    });
+    router.push("/LogIn");
+  };
   return (
     <div className="flex flex-col justify-center items-center gap-40 pt-10">
       <div className="flex flex-col gap-10">
@@ -13,7 +27,7 @@ export default function finish() {
         </div>
         <div className="steps w-[300px]">
           <li className="step step-primary">Currency</li>
-          <li className="step step-primary">Balance</li>
+          {/* <li className="step step-primary">Balance</li> */}
           <li className="step step-primary">Finish</li>
         </div>
       </div>
@@ -27,7 +41,7 @@ export default function finish() {
         <button
           className="btn btn-primary w-full"
           type="button"
-          onClick={() => router.push("/dashboard")}
+          onClick={handler}
         >
           Go to Dashboard
         </button>

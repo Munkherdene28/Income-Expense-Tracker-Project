@@ -14,7 +14,9 @@ export default function header() {
         >
           Dashboard
         </button>
-        <button onClick={() => routuer.push("/Records")}>Records</button>
+        <button onClick={() => routuer.push("/dashboard/Records")}>
+          Records
+        </button>
       </div>
       <div className="flex items-center space-x-4">
         <button className="btn btn-primary btn-sm">

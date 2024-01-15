@@ -1,8 +1,58 @@
 import { pool } from "../db.js";
 
-export const getUsers = async (_, res) => {
+export const createTable = async (_, res) => {
   try {
-    const queryText = "SELECT * FROM users";
+    const tableQueryText = `
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
+      password TEXT,
+      avatar_img bytea,
+      createAt TIMESTAMP,
+      updateAt TIMESTAMP,
+      currency_type  TEXT DEFAULT 'MNT'
+    )`;
+    await pool.query(tableQueryText);
+    res.send("Table Created");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deletetable = async (req, response) => {
+  try {
+    const queryText = `DROP TABLE IF EXISTS users;`;
+    await pool.query(queryText);
+    response.send("deleted users table");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createUser = async (req, response) => {
+  const { name, email, password, currency_type } = req.body;
+  console.log(req.body);
+  try {
+    const queryText =
+      "INSERT INTO users (name, email, password, currency_type) VALUES ($1, $2, $3, $4) RETURNING *";
+    const res = await pool.query(queryText, [
+      name,
+      email,
+      password,
+      currency_type,
+    ]);
+    console.log("succss");
+    response.send(res.rows[0]);
+  } catch (error) {
+    console.error(error);
+    response.send("error query eee");
+  }
+};
+
+export const getUsers = async (req, res) => {
+  try {
+    const queryText = `SELECT * FROM users`;
     const response = await pool.query(queryText);
     res.send(response.rows);
   } catch (error) {
@@ -11,48 +61,41 @@ export const getUsers = async (_, res) => {
 };
 
 export const getOneUser = async (req, res) => {
-  const { id, name, email } = req.body;
+  const { email, password } = req.body;
+  console.log("hvselt ", req.body);
   try {
-    const queryText = `SELECT * FROM users WHERE name='${name}' AND email='${email}'`;
+    const queryText = `SELECT * FROM users WHERE email='${email}' AND password = '${password}'`;
     const response = await pool.query(queryText);
-    res.send(response.rows);
+    console.log(response);
+    if (response.rows.length !== 0) {
+      res.send("success");
+    } else {
+      throw error;
+    }
   } catch (error) {
-    console.error(error);
-  }
-};
-
-export const createUser = async (req, response) => {
-  const { name, email, password } = req.body;
-  try {
-    const queryText =
-      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *";
-    const res = await pool.query(queryText, [name, email, password]);
-    response.send(res.rows[0]);
-  } catch (error) {
-    console.error(error);
+    res.status(400).send("Wrong username and password");
   }
 };
 
 export const deleteUser = async (req, response) => {
-  const { name, email, id } = req.body;
+  const { name, email } = req.body;
   try {
-    const queryText = `DELETE FROM users WHERE (name='${name}' AND email='${email}') OR id='${id}'`;
+    const queryText = `DELETE FROM users WHERE name = '${name}' AND email = '${email}'`;
+    // `DELETE FROM users WHERE name = '(${name}' AND email = '${email}') OR '${id}'`;
     await pool.query(queryText);
-    response.send("deleted");
+    response.send("Success");
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
 export const updateUser = async (req, response) => {
-  const { name, email, id } = req.body;
-
+  const { id, name, email } = req.body;
   try {
-    const queryText = `UPDATE users SET name = '${name}', email = '${email}' WHERE id = '${id}'`;
+    const queryText = `UPDATE  users SET name = '${name}', email = '${email}' WHERE id = '${id}'`;
     await pool.query(queryText);
-    response.send("updated");
+    response.send("Updated");
   } catch (error) {
-    response.send("error").end();
-    console.error(error);
+    console.log(error);
   }
 };

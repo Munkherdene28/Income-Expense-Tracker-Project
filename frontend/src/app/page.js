@@ -4,7 +4,7 @@ import Currency from "@/app/Currency/page";
 import Balance from "@/app/Balance/page";
 import Finish from "@/app/Finish/page";
 import One from "@/app/One.js";
-import Record from "../app/Records/Record";
+import Record from "./dashboard/Records/Record";
 export default function Home() {
   return (
     <main className=" w-screen-full h-screen-full">

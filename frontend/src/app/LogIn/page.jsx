@@ -1,9 +1,23 @@
 "use client";
-
 import { useRouter } from "next/navigation";
 import Vector from "@/app/SVG/Vector";
+import { useState } from "react";
+import axios from "axios";
+
+const api = "http://localhost:8000/users/LogIn";
+
 export default function LogIn() {
   const router = useRouter();
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
+
+  const handler = async () => {
+    let res = await axios.post(api, { email, password });
+    if (res.data === "success") {
+      router.push("/dashboard");
+    }
+  };
+
   return (
     <div className="flex">
       <div className="flex-1 h-screen flex items-center justify-center bg-white gap-4">
@@ -22,14 +36,18 @@ export default function LogIn() {
             <input
               type="text"
               placeholder="Email"
+              onChange={(event) => setemail(event.target.value)}
               className="input input-bordered w-full"
             />
             <input
               type="password"
               placeholder="Password"
+              onChange={(event) => setpassword(event.target.value)}
               className="input input-bordered w-full"
             />
-            <button className="btn btn-primary w-full">Log in</button>
+            <button className="btn btn-primary w-full" onClick={handler}>
+              Log in
+            </button>
           </div>
           <div className="flex items-center justify-center gap-3">
             <p className="text-gray-600">Don’t have an account?</p>

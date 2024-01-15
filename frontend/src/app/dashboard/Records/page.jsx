@@ -1,4 +1,4 @@
-import Record from "../Records/Record";
+import Record from "./Record";
 export default function main() {
   return (
     <main>
