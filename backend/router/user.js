@@ -10,11 +10,11 @@ import {
 } from "../controller/user.js";
 
 const user = express.Router();
-user.route("/createtable").post(createTable);
-user.route("/deletetable").delete(deletetable);
+user.route("/createTable").post(createTable);
+user.route("/deleteTable").delete(deletetable);
 user.route("/").post(createUser).get(getUsers);
-user.route("/login").post(getOneUser);
-user.route("deleteuser").delete(deleteUser);
-user.route("updateuser").put(updateUser);
+user.route("/LogIn").post(getOneUser);
+user.route("/deleteUser").delete(deleteUser);
+user.route("/updateUser").put(updateUser);
 
 export { user };

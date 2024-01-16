@@ -108,15 +108,24 @@ export default function record() {
               </div>
               <div className="pl-3 flex flex-col gap-3">
                 <div className="flex items-center gap-2">
-                  <p className="rounded-full w-[20px] h-[20px] border"></p>
+                  <input
+                    type="checkbox"
+                    className="checkbox rounded-full w-[20px] h-[20px]"
+                  />
                   <p>All</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <p className="rounded-full w-[20px] h-[20px] border"></p>
+                  <input
+                    type="checkbox"
+                    className="checkbox rounded-full w-[20px] h-[20px]"
+                  />
                   <p>Income</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <p className="rounded-full w-[20px] h-[20px] border"></p>
+                  <input
+                    type="checkbox"
+                    className="checkbox rounded-full w-[20px] h-[20px]"
+                  />
                   <p>Expense</p>
                 </div>
               </div>
@@ -140,9 +149,47 @@ export default function record() {
                   </div>
                 ))}
               </div>
-              <button className="flex items-center gap-3 pl-3 text-sm text-gray-700">
+              <button
+                className="flex items-center gap-3 pl-3 text-sm text-gray-700"
+                onClick={() =>
+                  document.getElementById("my_modal_3").showModal()
+                }
+              >
                 <Blue /> Add Category
               </button>
+              <dialog id="my_modal_3" className="modal">
+                <div className="modal-box flex flex-col gap-4">
+                  <div>
+                    <form className="flex justify-between w-full items-center">
+                      <h3 className="font-bold text-lg">Add Category</h3>
+                      <button>
+                        <Delete />
+                      </button>
+                    </form>
+                  </div>
+                  <hr />
+                  <div className="flex flex-col gap-6">
+                    <div className="flex gap-2">
+                      <select className="select select-bordered w-[100px]">
+                        <option>Who shot first?</option>
+                        <option>Han Solo</option>
+                        <option>Greedo</option>
+                      </select>
+                      <select className="select select-bordered w-full">
+                        <option>Who shot first?</option>
+                        <option>Han Solo</option>
+                        <option>Greedo</option>
+                      </select>
+                    </div>
+                    <button
+                      className="btn"
+                      style={{ backgroundColor: "#16A34A" }}
+                    >
+                      Add Category
+                    </button>
+                  </div>
+                </div>
+              </dialog>
             </div>
             <div className="flex flex-col gap-4">
               <h1>Amount Range</h1>

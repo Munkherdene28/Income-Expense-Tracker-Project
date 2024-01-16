@@ -1,20 +1,26 @@
-"use client";
 import Vector from "@/app/SVG/Vector";
 import Plus from "@/app/SVG/Plus";
 import { useRouter } from "next/navigation";
-export default function header() {
-  const routuer = useRouter();
+import { useState } from "react";
+export default function Header() {
+  const router = useRouter();
+
   return (
     <div className="flex justify-between px-20 py-4 items-center w-[1440px] mx-auto">
       <div className="flex items-center space-x-5">
         <Vector />
         <button
-          className="text-xl font-bold"
-          onClick={() => routuer.push("/dashboard")}
+          onClick={() => {
+            router.push("/dashboard");
+          }}
         >
           Dashboard
         </button>
-        <button onClick={() => routuer.push("/dashboard/Records")}>
+        <button
+          onClick={() => {
+            router.push("/dashboard/Records");
+          }}
+        >
           Records
         </button>
       </div>

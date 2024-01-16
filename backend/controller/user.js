@@ -42,7 +42,7 @@ export const createUser = async (req, response) => {
       password,
       currency_type,
     ]);
-    console.log("succss");
+    console.log("success");
     response.send(res.rows[0]);
   } catch (error) {
     console.error(error);
@@ -62,7 +62,7 @@ export const getUsers = async (req, res) => {
 
 export const getOneUser = async (req, res) => {
   const { email, password } = req.body;
-  console.log("hvselt ", req.body);
+
   try {
     const queryText = `SELECT * FROM users WHERE email='${email}' AND password = '${password}'`;
     const response = await pool.query(queryText);
@@ -81,7 +81,7 @@ export const deleteUser = async (req, response) => {
   const { name, email } = req.body;
   try {
     const queryText = `DELETE FROM users WHERE name = '${name}' AND email = '${email}'`;
-    // `DELETE FROM users WHERE name = '(${name}' AND email = '${email}') OR '${id}'`;
+
     await pool.query(queryText);
     response.send("Success");
   } catch (error) {
@@ -94,7 +94,7 @@ export const updateUser = async (req, response) => {
   try {
     const queryText = `UPDATE  users SET name = '${name}', email = '${email}' WHERE id = '${id}'`;
     await pool.query(queryText);
-    response.send("Updated");
+    response.send("updated");
   } catch (error) {
     console.log(error);
   }

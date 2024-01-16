@@ -15,6 +15,8 @@ export default function LogIn() {
     let res = await axios.post(api, { email, password });
     if (res.data === "success") {
       router.push("/dashboard");
+    } else {
+      alert("Invalid email or password. Please try again.");
     }
   };
 
