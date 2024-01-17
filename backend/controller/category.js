@@ -22,7 +22,7 @@ export const addCategory = async (req, response) => {
   const { name, description, createAt, updateAt, category_image } = req.body;
   try {
     const queryText =
-      "INSERT INTO category (name, description, createAt, updateAt, category_image) VALUES ($1, $2, $3,$4,$5) RETURNING *";
+      "INSERT INTO category (name, description, createAt, updateAt, category_image) VALUES ($1, $2, $3, $4, $5) RETURNING *";
     const res = await pool.query(queryText, [
       name,
       description,

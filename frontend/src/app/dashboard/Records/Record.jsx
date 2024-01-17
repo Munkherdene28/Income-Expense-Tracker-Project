@@ -6,6 +6,8 @@ import Icon from "../../SVG/Icon";
 import Blue from "../../SVG/Blue";
 import Delete from "../../SVG/Delete";
 import Select from "./Select";
+import Dropdown from "./Dropdown";
+import Drop from "./Drop";
 import React, { useState } from "react";
 export default function record() {
   const [isShow, setIsShow] = useState(false);
@@ -170,23 +172,16 @@ export default function record() {
                   <hr />
                   <div className="flex flex-col gap-6">
                     <div className="flex gap-2">
-                      <select className="select select-bordered w-[100px]">
-                        <option>Who shot first?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                      </select>
-                      <select className="select select-bordered w-full">
-                        <option>Who shot first?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                      </select>
+                      <Drop />
                     </div>
-                    <button
-                      className="btn"
-                      style={{ backgroundColor: "#16A34A" }}
-                    >
-                      Add Category
-                    </button>
+                    <form method="dialog">
+                      <button
+                        className="btn w-full"
+                        style={{ backgroundColor: "#16A34A" }}
+                      >
+                        Add Category
+                      </button>
+                    </form>
                   </div>
                 </div>
               </dialog>
@@ -261,11 +256,7 @@ export default function record() {
                 />
                 <div className="flex flex-col gap-2">
                   <h1>Category</h1>
-                  <select className="select select-bordered bg-gray-50">
-                    <option>Find or choose category</option>
-                    <option>Home</option>
-                    <option>Gift</option>
-                  </select>
+                  <Dropdown />
                 </div>
                 <div className="flex gap-2">
                   <div className="flex flex-col gap-2 w-full">
@@ -286,6 +277,7 @@ export default function record() {
                   style={{
                     backgroundColor: incomeButtonColor,
                   }}
+                  onClick={handleAddButtonClick}
                 >
                   Add Record
                 </button>

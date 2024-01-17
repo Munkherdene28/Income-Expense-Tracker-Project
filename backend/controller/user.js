@@ -5,8 +5,8 @@ export const createTable = async (_, res) => {
     const tableQueryText = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
+      name VARCHAR(50) NOT NULL,
+      email VARCHAR(50) UNIQUE NOT NULL,
       password TEXT,
       avatar_img bytea,
       createAt TIMESTAMP,
