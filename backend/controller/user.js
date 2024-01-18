@@ -4,7 +4,7 @@ export const createTable = async (_, res) => {
   try {
     const tableQueryText = `
     CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
+      id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
       name VARCHAR(50) NOT NULL,
       email VARCHAR(50) UNIQUE NOT NULL,
       password TEXT,
@@ -14,7 +14,7 @@ export const createTable = async (_, res) => {
       currency_type  TEXT DEFAULT 'MNT'
     )`;
     await pool.query(tableQueryText);
-    res.send("Table Created");
+    res.send("Users table created");
   } catch (error) {
     console.error(error);
   }
@@ -46,7 +46,7 @@ export const createUser = async (req, response) => {
     response.send(res.rows[0]);
   } catch (error) {
     console.error(error);
-    response.send("error query eee");
+    response.send("error query");
   }
 };
 

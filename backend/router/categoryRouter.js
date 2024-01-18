@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createTable,
+  deleteTable,
   addCategory,
   getCategory,
 } from "../controller/category.js";
@@ -8,6 +9,6 @@ import {
 const category = express.Router();
 
 category.route("/").post(createTable);
-category.route("/addData").post(addCategory);
-category.route("/getData").get(getCategory);
+category.route("/deleteTable").delete(deleteTable);
+category.route("/add").post(addCategory).get(getCategory);
 export { category };

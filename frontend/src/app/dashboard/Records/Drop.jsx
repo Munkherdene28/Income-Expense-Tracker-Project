@@ -1,4 +1,11 @@
 "use client";
+import { useState } from "react";
+import Blue from "../../SVG/Blue";
+import Delete from "../../SVG/Delete";
+import axios from "axios";
+
+const api = "http://localhost:8000/category";
+
 export default function drop() {
   const svg = [
     {
@@ -482,28 +489,63 @@ export default function drop() {
       ),
     },
   ];
+  const [categoryName, setCategoryName] = useState("");
+  const handler = async () => {
+    let res = await axios.post(api, { categoryName });
+  };
   return (
-    <div className="flex gap-4 w-full">
-      <div className="dropdown">
-        <select className="select select-bordered bg-gray-50 w-full"></select>
-        <div className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-[250px] overflow-hidden overflow-y-auto flex flex-col gap-4">
-          <div className="flex gap-4 flex-wrap">
-            {svg.map((data, index) => (
-              <div key={index}>
-                <div>{data.svg}</div>
+    <div>
+      <button
+        className="flex items-center gap-3 pl-3 text-sm text-gray-700"
+        onClick={() => document.getElementById("my_modal_3").showModal()}
+      >
+        <Blue /> Add Category
+      </button>
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box flex flex-col gap-4">
+          <div>
+            <form className="flex justify-between w-full items-center">
+              <h3 className="font-bold text-lg">Add Category</h3>
+              <button>
+                <Delete />
+              </button>
+            </form>
+          </div>
+          <hr />
+          <div className="flex flex-col gap-6">
+            <div className="flex gap-2">
+              <div className="flex gap-4 w-full">
+                <div className="dropdown">
+                  <select className="select select-bordered bg-gray-50 w-full"></select>
+                  <div className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-[250px] overflow-hidden overflow-y-auto flex flex-col gap-4">
+                    <div className="flex gap-4 flex-wrap">
+                      {svg.map((data, index) => (
+                        <div key={index}>
+                          <div>{data.svg}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <input
+                  type="text"
+                  placeholder="name"
+                  onChange={(e) => setCategoryName(e.target.value)}
+                />
               </div>
-            ))}
+            </div>
+            <form method="dialog">
+              <button
+                className="btn w-full"
+                style={{ backgroundColor: "#16A34A" }}
+                onClick={handler}
+              >
+                Add Category
+              </button>
+            </form>
           </div>
         </div>
-      </div>
-      <select
-        className="select select-bordered bg-gray-50 w-full"
-        onChange={(event) => setCategoryName(event.target.value)}
-      >
-        <option>Name</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
-      </select>
+      </dialog>
     </div>
   );
 }

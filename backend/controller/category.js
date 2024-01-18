@@ -4,7 +4,7 @@ export const createTable = async (_, res) => {
   try {
     const tableQueryText = `
       CREATE TABLE IF NOT EXISTS category (
-        id SERIAL PRIMARY KEY,
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
         name VARCHAR(100),
         description TEXT,
         createAt TIMESTAMP,
@@ -12,9 +12,19 @@ export const createTable = async (_, res) => {
         category_image text
       )`;
     await pool.query(tableQueryText);
-    res.send("Table Created");
+    res.send(" Category table created");
   } catch (error) {
     console.error(error);
+  }
+};
+
+export const deleteTable = async (req, res) => {
+  try {
+    const queryText = `DROP TABLE IF EXISTS category;`;
+    await pool.query(queryText);
+    res.send("deleted category table");
+  } catch (error) {
+    console.log(error);
   }
 };
 

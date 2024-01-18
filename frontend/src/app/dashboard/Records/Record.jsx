@@ -3,12 +3,14 @@ import Header from "../Header";
 import Plus from "../../SVG/Plus";
 import Eye from "../../SVG/Eye";
 import Icon from "../../SVG/Icon";
-import Blue from "../../SVG/Blue";
 import Delete from "../../SVG/Delete";
 import Select from "./Select";
 import Dropdown from "./Dropdown";
 import Drop from "./Drop";
 import React, { useState } from "react";
+
+const api = "http://localhost:8000/category";
+
 export default function record() {
   const [isShow, setIsShow] = useState(false);
   const handleAddButtonClick = () => {
@@ -137,7 +139,7 @@ export default function record() {
                 <h1 className="text-md font-semibold">Category</h1>
                 <button className="text-gray-300">Clear</button>
               </div>
-              <div className="flex flex-col gap-4 items-center pl-3 ">
+              {/* <div className="flex flex-col gap-4 items-center pl-3 ">
                 {Category.map((data, index) => (
                   <div
                     key={index}
@@ -150,41 +152,8 @@ export default function record() {
                     <div>{data.icon}</div>
                   </div>
                 ))}
-              </div>
-              <button
-                className="flex items-center gap-3 pl-3 text-sm text-gray-700"
-                onClick={() =>
-                  document.getElementById("my_modal_3").showModal()
-                }
-              >
-                <Blue /> Add Category
-              </button>
-              <dialog id="my_modal_3" className="modal">
-                <div className="modal-box flex flex-col gap-4">
-                  <div>
-                    <form className="flex justify-between w-full items-center">
-                      <h3 className="font-bold text-lg">Add Category</h3>
-                      <button>
-                        <Delete />
-                      </button>
-                    </form>
-                  </div>
-                  <hr />
-                  <div className="flex flex-col gap-6">
-                    <div className="flex gap-2">
-                      <Drop />
-                    </div>
-                    <form method="dialog">
-                      <button
-                        className="btn w-full"
-                        style={{ backgroundColor: "#16A34A" }}
-                      >
-                        Add Category
-                      </button>
-                    </form>
-                  </div>
-                </div>
-              </dialog>
+              </div> */}
+              <Drop />
             </div>
             <div className="flex flex-col gap-4">
               <h1>Amount Range</h1>
