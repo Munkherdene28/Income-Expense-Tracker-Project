@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Blue from "../../SVG/Blue";
 import Delete from "../../SVG/Delete";
 import axios from "axios";
 
-const api = "http://localhost:8000/category";
+const api = "http://localhost:8000/category/add";
 
 export default function drop() {
   const svg = [
@@ -491,7 +491,7 @@ export default function drop() {
   ];
   const [categoryName, setCategoryName] = useState("");
   const handler = async () => {
-    let res = await axios.post(api, { categoryName });
+    let res = await axios.post(api, { name: categoryName });
   };
   return (
     <div>
@@ -529,6 +529,7 @@ export default function drop() {
                 </div>
                 <input
                   type="text"
+                  value={categoryName}
                   placeholder="name"
                   onChange={(e) => setCategoryName(e.target.value)}
                 />

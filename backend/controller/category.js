@@ -29,17 +29,11 @@ export const deleteTable = async (req, res) => {
 };
 
 export const addCategory = async (req, response) => {
-  const { name, description, createAt, updateAt, category_image } = req.body;
+  const { name, description } = req.body;
   try {
     const queryText =
-      "INSERT INTO category (name, description, createAt, updateAt, category_image) VALUES ($1, $2, $3, $4, $5) RETURNING *";
-    const res = await pool.query(queryText, [
-      name,
-      description,
-      createAt,
-      updateAt,
-      category_image,
-    ]);
+      "INSERT INTO category (name, description) VALUES ($1, $2) RETURNING *";
+    const res = await pool.query(queryText, [name, description]);
     response.send(res.rows[0]);
   } catch (error) {
     console.error(error);
@@ -48,12 +42,22 @@ export const addCategory = async (req, response) => {
 };
 
 export const getCategory = async (req, res) => {
-  const { name } = req.body;
   try {
-    const queryText = `SELECT * FROM category WHERE name='${name}'`;
+    const queryText = `SELECT * FROM category`;
     const response = await pool.query(queryText);
     res.send(response.rows);
   } catch (error) {
     console.error(error);
+  }
+};
+export const deletecategory = async (req, response) => {
+  const { name } = req.body;
+  try {
+    const queryText = `DELETE FROM category WHERE name = '${name}'`;
+
+    await pool.query(queryText);
+    response.send("Success");
+  } catch (error) {
+    console.log(error);
   }
 };

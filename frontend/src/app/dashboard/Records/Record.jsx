@@ -7,9 +7,12 @@ import Delete from "../../SVG/Delete";
 import Select from "./Select";
 import Dropdown from "./Dropdown";
 import Drop from "./Drop";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const api = "http://localhost:8000/category";
+const api2 = "http://localhost:8000/category/add1";
+const api3 = "http://localhost:8000/transaction/post";
 
 export default function record() {
   const [isShow, setIsShow] = useState(false);
@@ -85,7 +88,24 @@ export default function record() {
       icon: <Icon />,
     },
   ];
-
+  const [data, setData] = useState([]);
+  const click = async () => {
+    let res = await axios.get(api2);
+    setData(res.data);
+  };
+  useEffect(() => {
+    click();
+  });
+  // const [amount, setAmount] = useState("");
+  // const [payee, setPayee] = useState("");
+  // const [note, setNote] = useState("");
+  // const handler = async () => {
+  //   let res = await axios.post(api3, {
+  //     amount: amount,
+  //     payee: payee,
+  //     note: note,
+  //   });
+  // };
   return (
     <div>
       <Header />
@@ -153,6 +173,16 @@ export default function record() {
                   </div>
                 ))}
               </div> */}
+              <div className="flex flex-col gap-2 overflow-hidden h-[380px] overflow-y-auto">
+                {data.map((dat, index) => (
+                  <div key={index} className="flex flex-col gap-10">
+                    <div className="flex gap-6">
+                      <Eye />
+                      <div>{dat.name}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
               <Drop />
             </div>
             <div className="flex flex-col gap-4">
@@ -222,6 +252,7 @@ export default function record() {
                   type="text"
                   placeholder="Amount ₮ 000,00"
                   className="input input-bordered input-lg flex flex-col"
+                  onChange={(e) => setAmount(e.target.value)}
                 />
                 <div className="flex flex-col gap-2">
                   <h1>Category</h1>
@@ -254,7 +285,10 @@ export default function record() {
               <div className="flex flex-col gap-2">
                 <div className="flex flex-col gap-2">
                   <h1>Payee</h1>
-                  <select className="select select-bordered bg-gray-50 w-[350px]">
+                  <select
+                    className="select select-bordered bg-gray-50 w-[350px]"
+                    onChange={(e) => setPayee(e.target.value)}
+                  >
                     <option>Write here</option>
                     <option>Han Solo</option>
                     <option>Greedo</option>
@@ -265,6 +299,7 @@ export default function record() {
                   <textarea
                     className="textarea textarea-bordered w-[350px] h-[293px]"
                     placeholder="Write here"
+                    onChange={(e) => setNote(e.target.value)}
                   ></textarea>
                 </div>
               </div>

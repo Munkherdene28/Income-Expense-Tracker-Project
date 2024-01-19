@@ -29,3 +29,40 @@ export const deleteTable = async (req, res) => {
     console.log(error);
   }
 };
+export const addTransaction = async (req, res) => {
+  const { amount, payeeUser, desc, value, userid } = req.body;
+  try {
+    const queryText =
+      "INSERT INTO transactions (amount, name, description, category_id, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const res = await pool.query(queryText, [
+      amount,
+      payeeUser,
+      desc,
+      value,
+      userid,
+    ]);
+    res.send(res.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.send("error query");
+  }
+};
+
+export const getTransaction = async (req, response) => {
+  const { name, description, createAt, updateAt, category_image } = req.body;
+  try {
+    const queryText =
+      "INSERT INTO category (name, description, createAt, updateAt, category_image) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const res = await pool.query(queryText, [
+      name,
+      description,
+      createAt,
+      updateAt,
+      category_image,
+    ]);
+    response.send(res.rows[0]);
+  } catch (error) {
+    console.error(error);
+    response.send("error query");
+  }
+};
